@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Xdebug CVE Wordpress",
+      "type": "php",
+      "request": "launch",
+      "port": 9003,
+      "pathMappings": {
+        "/var/www/html": "${workspaceFolder}/wordpress_docker/wordpress/src"
+      },
+      "log": true,
+      "ignore": ["**/vendor/**/*.php"]
+    }
+  ]
+}

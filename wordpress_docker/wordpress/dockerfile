@@ -1,0 +1,21 @@
+FROM wordpress:latest
+
+WORKDIR /var/www/html
+
+# Cài đặt Xdebug bản mới nhất tương thích PHP 8.2
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+# Copy file php.ini đã cấu hình sẵn
+COPY ./php.ini /usr/local/etc/php/php.ini
+
+# Thiết lập quyền
+RUN chown -R root:www-data /var/www/html && \
+    chmod 750 /var/www/html && \
+    find . -type f -exec chmod 640 {} \; && \
+    find . -type d -exec chmod 750 {} \;
+
+# Tạo thư mục lưu dữ liệu tạm
+RUN mkdir /usr/save_files/ && \
+    chown -R www-data:www-data /usr/save_files/ && \
+    chmod +t -R /var/www/html/
